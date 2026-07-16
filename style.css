@@ -1,0 +1,56 @@
+/* Xóa khoảng trắng mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Toàn bộ trang */
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+    font-family: Arial, sans-serif;
+}
+
+/* Ảnh nền */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* Phụ đề */
+#subtitle {
+    position: fixed;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    text-align: center;
+
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1.5;
+
+    text-shadow:
+        2px 2px 6px rgba(0,0,0,0.8),
+        -2px -2px 6px rgba(0,0,0,0.8);
+
+    z-index: 100;
+    padding: 10px;
+}
+
+/* Điện thoại */
+@media (max-width: 768px) {
+    #subtitle {
+        font-size: 22px;
+        bottom: 6%;
+    }
+}
