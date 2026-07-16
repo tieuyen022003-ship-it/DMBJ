@@ -1,56 +1,329 @@
-/* Xóa khoảng trắng mặc định */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ==========================
+   RESET
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-/* Toàn bộ trang */
-html, body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #000;
-    font-family: Arial, sans-serif;
+html,body{
+
+    width:100%;
+    height:100%;
+    overflow:hidden;
+
+    font-family:'Montserrat',sans-serif;
+
+    background:#000;
+
 }
 
-/* Ảnh nền */
-.background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: 1;
+/* ==========================
+   BACKGROUND
+========================== */
+
+.background{
+
+    position:fixed;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    filter:blur(10px) brightness(.35);
+
+    transform:scale(1.1);
+
+    z-index:-3;
+
 }
 
-/* Phụ đề */
-#subtitle {
-    position: fixed;
-    bottom: 8%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    text-align: center;
+.overlay{
 
-    color: #ffffff;
-    font-size: 28px;
-    font-weight: bold;
-    line-height: 1.5;
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.35);
+
+    z-index:-2;
+
+}
+
+/* ==========================
+   INTRO
+========================== */
+
+#intro{
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    transition:.5s;
+
+}
+
+#cover{
+
+    width:260px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 20px 60px rgba(0,0,0,.5);
+
+    margin-bottom:35px;
+
+}
+
+h1{
+
+    color:white;
+
+    font-size:56px;
+
+    font-weight:800;
+
+    letter-spacing:8px;
+
+}
+
+h2{
+
+    margin-top:10px;
+
+    color:#d0d0d0;
+
+    font-size:22px;
+
+    font-weight:600;
+
+    letter-spacing:4px;
+
+    margin-bottom:40px;
+
+}
+
+#playBtn{
+
+    border:none;
+
+    padding:18px 60px;
+
+    border-radius:999px;
+
+    background:#1DB954;
+
+    color:white;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+#playBtn:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:0 0 25px rgba(29,185,84,.6);
+
+}
+
+/* ==========================
+   PLAYER
+========================== */
+
+#player{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.5s;
+
+}
+
+/* ==========================
+   SUBTITLE
+========================== */
+
+#subtitle{
+
+    width:80%;
+
+    text-align:center;
+
+    color:#fff;
+
+    font-size:38px;
+
+    font-weight:700;
+
+    line-height:1.6;
+
+    letter-spacing:.5px;
+
+    -webkit-text-stroke:1px #000;
 
     text-shadow:
-        2px 2px 6px rgba(0,0,0,0.8),
-        -2px -2px 6px rgba(0,0,0,0.8);
+    2px 2px 0 #000,
+    -2px 2px 0 #000,
+    2px -2px 0 #000,
+    -2px -2px 0 #000,
+    0 0 20px rgba(0,0,0,.9);
 
-    z-index: 100;
-    padding: 10px;
 }
 
-/* Điện thoại */
-@media (max-width: 768px) {
-    #subtitle {
-        font-size: 22px;
-        bottom: 6%;
-    }
+/* ==========================
+   CONTROLS
+========================== */
+
+#controls{
+
+    width:70%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-top:40px;
+
+}
+
+#controls span{
+
+    color:white;
+
+    font-size:15px;
+
+    width:60px;
+
+    text-align:center;
+
+}
+
+#progress{
+
+    flex:1;
+
+    accent-color:#1DB954;
+
+    cursor:pointer;
+
+}
+
+/* ==========================
+   REPLAY
+========================== */
+
+#replayBtn{
+
+    display:none;
+
+    margin-top:40px;
+
+    padding:16px 50px;
+
+    border:none;
+
+    border-radius:999px;
+
+    background:#1DB954;
+
+    color:white;
+
+    font-size:20px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+}
+
+#replayBtn:hover{
+
+    transform:scale(1.05);
+
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:768px){
+
+#cover{
+
+    width:220px;
+
+}
+
+h1{
+
+    font-size:42px;
+
+}
+
+h2{
+
+    font-size:18px;
+
+}
+
+#subtitle{
+
+    width:92%;
+
+    font-size:28px;
+
+}
+
+#controls{
+
+    width:90%;
+
+}
+
+#playBtn{
+
+    padding:16px 40px;
+
+    font-size:18px;
+
+}
+
 }

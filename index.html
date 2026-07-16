@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voice Card</title>
+
+    <title>DMBJ</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -11,18 +16,86 @@
 <body>
 
     <!-- Ảnh nền -->
-    <img src="cover.png" class="background" alt="Cover">
+    <img src="cover.png" class="background">
 
-    <!-- Âm thanh -->
+    <!-- Lớp phủ tối -->
+    <div class="overlay"></div>
+
+    <!-- Giao diện mở đầu -->
+    <div id="intro">
+
+        <img src="cover.png" id="cover">
+
+        <h1>DMBJ</h1>
+
+        <h2>KỂ CHUYỆN AI</h2>
+
+        <button id="playBtn">
+
+            ▶ PLAY
+
+        </button>
+
+    </div>
+
+    <!-- Giao diện phát -->
+
+    <div id="player">
+
+        <!-- phụ đề -->
+
+        <div id="subtitle">
+
+            ...
+
+        </div>
+
+        <!-- thanh tiến trình -->
+
+        <div id="controls">
+
+            <span id="current">
+
+                00:00
+
+            </span>
+
+            <input
+                id="progress"
+                type="range"
+                value="0"
+                min="0"
+                max="100"
+            >
+
+            <span id="duration">
+
+                00:00
+
+            </span>
+
+        </div>
+
+        <!-- nút phát lại -->
+
+        <button id="replayBtn">
+
+            ↻ PHÁT LẠI
+
+        </button>
+
+    </div>
+
+    <!-- Audio -->
+
     <audio id="audio">
-        <source src="voice.m4a" type="audio/mp4">
-        Trình duyệt của bạn không hỗ trợ phát âm thanh.
-    </audio>
 
-    <!-- Phụ đề -->
-    <div id="subtitle"></div>
+        <source src="voice.m4a" type="audio/mp4">
+
+    </audio>
 
     <script src="script.js"></script>
 
 </body>
+
 </html>
