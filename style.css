@@ -1,6 +1,6 @@
-/* ==========================
+/* ===========================================
    RESET
-========================== */
+=========================================== */
 
 *{
     margin:0;
@@ -8,126 +8,210 @@
     box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
 
     width:100%;
     height:100%;
-    overflow:hidden;
 
-    font-family:'Montserrat',sans-serif;
+}
+
+body{
+
+    overflow:hidden;
 
     background:#000;
 
+    font-family:"Be Vietnam Pro",sans-serif;
+
+    color:#fff;
+
 }
 
-/* ==========================
+/* ===========================================
    BACKGROUND
-========================== */
+=========================================== */
 
-.background{
-
-    position:fixed;
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    filter:blur(10px) brightness(.35);
-
-    transform:scale(1.1);
-
-    z-index:-3;
-
-}
-
-.overlay{
+#background{
 
     position:fixed;
 
     inset:0;
 
-    background:rgba(0,0,0,.35);
+    overflow:hidden;
+
+    z-index:-3;
+
+}
+
+#bgImage{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transform:scale(1.1);
+
+    filter:
+
+        blur(10px)
+
+        brightness(.35);
+
+    animation:
+
+        zoom 30s linear infinite alternate;
+
+}
+
+@keyframes zoom{
+
+    from{
+
+        transform:scale(1.08);
+
+    }
+
+    to{
+
+        transform:scale(1.18);
+
+    }
+
+}
+
+#overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            rgba(0,0,0,.2),
+
+            rgba(0,0,0,.55)
+
+        );
 
     z-index:-2;
 
 }
 
-/* ==========================
+/* ===========================================
    INTRO
-========================== */
+=========================================== */
 
 #intro{
 
-    position:absolute;
+    position:fixed;
 
-    width:100%;
-    height:100%;
+    inset:0;
 
     display:flex;
-
-    flex-direction:column;
 
     justify-content:center;
 
     align-items:center;
 
-    transition:.5s;
+    transition:.6s;
+
+    z-index:10;
 
 }
 
-#cover{
+.intro-box{
 
-    width:260px;
+    text-align:center;
 
-    border-radius:20px;
-
-    box-shadow:
-    0 20px 60px rgba(0,0,0,.5);
-
-    margin-bottom:35px;
+    animation:fadeIn 1s;
 
 }
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ===========================================
+   TITLE
+=========================================== */
 
 h1{
 
-    color:white;
-
-    font-size:56px;
+    font-size:72px;
 
     font-weight:800;
 
-    letter-spacing:8px;
+    letter-spacing:10px;
+
+    color:#fff;
+
+    margin-bottom:12px;
+
+    text-transform:uppercase;
+
+    text-shadow:
+        0 0 8px rgba(0,0,0,.8),
+        0 0 20px rgba(0,0,0,.7);
+
+    -webkit-text-stroke:1px #000;
 
 }
 
 h2{
 
-    margin-top:10px;
+    font-size:24px;
 
-    color:#d0d0d0;
+    font-weight:500;
 
-    font-size:22px;
+    letter-spacing:6px;
 
-    font-weight:600;
+    text-transform:uppercase;
 
-    letter-spacing:4px;
+    color:#ffffffdd;
 
-    margin-bottom:40px;
+    margin-bottom:55px;
+
+    text-shadow:
+        0 0 10px rgba(0,0,0,.9);
 
 }
 
+/* ===========================================
+   PLAY BUTTON
+=========================================== */
+
 #playBtn{
 
-    border:none;
+    padding:18px 70px;
 
-    padding:18px 60px;
+    border:none;
 
     border-radius:999px;
 
     background:#1DB954;
 
-    color:white;
+    color:#fff;
 
     font-size:22px;
 
@@ -137,7 +221,7 @@ h2{
 
     cursor:pointer;
 
-    transition:.25s;
+    transition:.3s;
 
 }
 
@@ -145,74 +229,105 @@ h2{
 
     transform:scale(1.05);
 
-    box-shadow:0 0 25px rgba(29,185,84,.6);
+    background:#1ed760;
 
 }
 
-/* ==========================
+#playBtn:active{
+
+    transform:scale(.96);
+
+}
+
+/* ===========================================
    PLAYER
-========================== */
+=========================================== */
 
 #player{
 
-    position:absolute;
+    position:fixed;
 
     inset:0;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
 
     opacity:0;
 
     pointer-events:none;
 
-    transition:.5s;
+    transition:.6s;
 
 }
 
-/* ==========================
+/* ===========================================
    SUBTITLE
-========================== */
+=========================================== */
+
+#subtitleArea{
+
+    position:absolute;
+
+    left:0;
+
+    right:0;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:0 60px;
+
+}
 
 #subtitle{
 
     width:80%;
 
+    max-width:1200px;
+
+    min-height:140px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
     text-align:center;
 
-    color:#fff;
-
-    font-size:38px;
-
-    font-weight:700;
+    font-size:42px;
 
     line-height:1.6;
 
-    letter-spacing:.5px;
+    font-weight:700;
 
-    -webkit-text-stroke:1px #000;
+    color:#fff;
 
     text-shadow:
-    2px 2px 0 #000,
-    -2px 2px 0 #000,
-    2px -2px 0 #000,
-    -2px -2px 0 #000,
-    0 0 20px rgba(0,0,0,.9);
+        0 0 12px rgba(0,0,0,1),
+        0 0 24px rgba(0,0,0,.8);
+
+    -webkit-text-stroke:.8px #000;
 
 }
 
-/* ==========================
-   CONTROLS
-========================== */
+/* ===========================================
+   BOTTOM CONTROL BAR
+=========================================== */
 
-#controls{
+#bottomBar{
 
-    width:70%;
+    position:fixed;
+
+    left:35px;
+
+    right:35px;
+
+    bottom:25px;
 
     display:flex;
 
@@ -220,43 +335,128 @@ h2{
 
     gap:15px;
 
-    margin-top:40px;
+    z-index:20;
 
 }
 
-#controls span{
+#current,
+#duration{
 
-    color:white;
-
-    font-size:15px;
-
-    width:60px;
+    width:65px;
 
     text-align:center;
 
+    font-size:15px;
+
+    font-weight:600;
+
+    color:#ffffffcc;
+
 }
+
+/* ===========================================
+   PROGRESS BAR
+=========================================== */
 
 #progress{
 
     flex:1;
 
-    accent-color:#1DB954;
+    height:6px;
+
+    appearance:none;
+
+    -webkit-appearance:none;
+
+    border-radius:999px;
+
+    background:#555;
 
     cursor:pointer;
 
 }
 
-/* ==========================
-   REPLAY
-========================== */
+/* Chrome */
+
+#progress::-webkit-slider-runnable-track{
+
+    height:6px;
+
+    background:#555;
+
+    border-radius:999px;
+
+}
+
+#progress::-webkit-slider-thumb{
+
+    appearance:none;
+
+    -webkit-appearance:none;
+
+    width:16px;
+
+    height:16px;
+
+    border-radius:50%;
+
+    background:#1DB954;
+
+    margin-top:-5px;
+
+    transition:.2s;
+
+}
+
+#progress:hover::-webkit-slider-thumb{
+
+    transform:scale(1.15);
+
+}
+
+/* Firefox */
+
+#progress::-moz-range-track{
+
+    height:6px;
+
+    background:#555;
+
+    border-radius:999px;
+
+}
+
+#progress::-moz-range-thumb{
+
+    width:16px;
+
+    height:16px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#1DB954;
+
+}
+
+/* ===========================================
+   REPLAY BUTTON
+=========================================== */
 
 #replayBtn{
 
+    position:fixed;
+
+    left:50%;
+
+    bottom:90px;
+
+    transform:translateX(-50%);
+
     display:none;
 
-    margin-top:40px;
-
-    padding:16px 50px;
+    padding:15px 45px;
 
     border:none;
 
@@ -264,7 +464,7 @@ h2{
 
     background:#1DB954;
 
-    color:white;
+    color:#fff;
 
     font-size:20px;
 
@@ -272,58 +472,129 @@ h2{
 
     cursor:pointer;
 
+    transition:.3s;
+
 }
 
 #replayBtn:hover{
 
-    transform:scale(1.05);
+    transform:translateX(-50%) scale(1.05);
+
+    background:#1ed760;
 
 }
 
-/* ==========================
-   RESPONSIVE
-========================== */
+/* ===========================================
+   SHOW / HIDE
+=========================================== */
+
+.show{
+
+    opacity:1 !important;
+
+    pointer-events:auto !important;
+
+}
+
+.hide{
+
+    opacity:0 !important;
+
+    pointer-events:none !important;
+
+}
+
+/* ===========================================
+   SUBTITLE EFFECT
+=========================================== */
+
+.fade{
+
+    animation:subtitleFade .35s ease;
+
+}
+
+@keyframes subtitleFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(8px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ===========================================
+   MOBILE
+=========================================== */
 
 @media(max-width:768px){
 
-#cover{
+    h1{
 
-    width:220px;
+        font-size:42px;
 
-}
+        letter-spacing:5px;
 
-h1{
+    }
 
-    font-size:42px;
+    h2{
 
-}
+        font-size:18px;
 
-h2{
+        letter-spacing:2px;
 
-    font-size:18px;
+        margin-bottom:35px;
 
-}
+    }
 
-#subtitle{
+    #playBtn{
 
-    width:92%;
+        padding:15px 45px;
 
-    font-size:28px;
+        font-size:18px;
 
-}
+    }
 
-#controls{
+    #subtitle{
 
-    width:90%;
+        width:92%;
 
-}
+        min-height:100px;
 
-#playBtn{
+        font-size:28px;
 
-    padding:16px 40px;
+        line-height:1.5;
 
-    font-size:18px;
+    }
 
-}
+    #bottomBar{
+
+        left:15px;
+
+        right:15px;
+
+        bottom:18px;
+
+    }
+
+    #current,
+    #duration{
+
+        width:48px;
+
+        font-size:13px;
+
+    }
 
 }

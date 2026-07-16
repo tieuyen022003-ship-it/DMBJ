@@ -2,33 +2,73 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>DMBJ</title>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>DMBJ | NGÔ TÀ</title>
 
     <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="style.css">
+
 </head>
 
 <body>
 
-    <!-- Ảnh nền -->
-    <img src="cover.png" class="background">
+<!-- ===========================
+BACKGROUND
+============================ -->
 
-    <!-- Lớp phủ tối -->
-    <div class="overlay"></div>
+<div id="background">
 
-    <!-- Giao diện mở đầu -->
-    <div id="intro">
+    <img
+        src="cover.png"
+        id="bgImage"
+        alt="Background">
 
-        <img src="cover.png" id="cover">
+</div>
 
-        <h1>DMBJ</h1>
+<div id="overlay"></div>
 
-        <h2>KỂ CHUYỆN AI</h2>
+<!-- ===========================
+INTRO
+============================ -->
+
+<section id="intro">
+
+    <div class="intro-box">
+
+        <h1>
+
+            DMBJ
+
+        </h1>
+
+        <h2>
+
+            NGÔ TÀ
+
+        </h2>
 
         <button id="playBtn">
 
@@ -38,11 +78,15 @@
 
     </div>
 
-    <!-- Giao diện phát -->
+</section>
 
-    <div id="player">
+<!-- ===========================
+PLAYER
+============================ -->
 
-        <!-- phụ đề -->
+<section id="player">
+
+    <div id="subtitleArea">
 
         <div id="subtitle">
 
@@ -50,49 +94,54 @@
 
         </div>
 
-        <!-- thanh tiến trình -->
+    </div>
 
-        <div id="controls">
+    <div id="bottomBar">
 
-            <span id="current">
+        <span id="current">
 
-                00:00
+            00:00
 
-            </span>
+        </span>
 
-            <input
-                id="progress"
-                type="range"
-                value="0"
-                min="0"
-                max="100"
-            >
+        <input
+            type="range"
+            id="progress"
+            min="0"
+            value="0"
+            step="1">
 
-            <span id="duration">
+        <span id="duration">
 
-                00:00
+            00:00
 
-            </span>
-
-        </div>
-
-        <!-- nút phát lại -->
-
-        <button id="replayBtn">
-
-            ↻ PHÁT LẠI
-
-        </button>
+        </span>
 
     </div>
 
-    <!-- Audio -->
+    <button id="replayBtn">
 
-    <audio id="audio">
+        ↻ PHÁT LẠI
 
-        <source src="voice.m4a" type="audio/mp4">
+    </button>
 
-    </audio>
+</section>
+
+<!-- ===========================
+AUDIO
+============================ -->
+
+<audio id="audio">
+
+    <source
+        src="voice.m4a"
+        type="audio/mp4">
+
+</audio>
+
+    <!-- ===========================
+         SCRIPT
+    ============================ -->
 
     <script src="script.js"></script>
 
