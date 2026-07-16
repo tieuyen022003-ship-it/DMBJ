@@ -3,147 +3,36 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<title>Voice Card</title>
 
-    <title>DMBJ | NGÔ TÀ</title>
-
-    <!-- Font -->
-
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <link
-        rel="stylesheet"
-        href="style.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-<!-- ===========================
-BACKGROUND
-============================ -->
+<img src="cover.png" class="background">
 
-<div id="background">
+<div class="overlay"></div>
 
-    <img
-        src="cover.png"
-        id="bgImage"
-        alt="Background">
+<div id="subtitle"></div>
 
-</div>
+<button id="playButton">
+▶
+</button>
 
-<div id="overlay"></div>
-
-<!-- ===========================
-INTRO
-============================ -->
-
-<section id="intro">
-
-    <div class="intro-box">
-
-        <h1>
-
-            DMBJ
-
-        </h1>
-
-        <h2>
-
-            NGÔ TÀ
-
-        </h2>
-
-        <button id="playBtn">
-
-            ▶ PLAY
-
-        </button>
-
-    </div>
-
-</section>
-
-<!-- ===========================
-PLAYER
-============================ -->
-
-<section id="player">
-
-    <div id="subtitleArea">
-
-        <div id="subtitle">
-
-            ...
-
-        </div>
-
-    </div>
-
-    <div id="bottomBar">
-
-        <span id="current">
-
-            00:00
-
-        </span>
-
-        <input
-            type="range"
-            id="progress"
-            min="0"
-            value="0"
-            step="1">
-
-        <span id="duration">
-
-            00:00
-
-        </span>
-
-    </div>
-
-    <button id="replayBtn">
-
-        ↻ PHÁT LẠI
-
-    </button>
-
-</section>
-
-<!-- ===========================
-AUDIO
-============================ -->
+<button id="replayButton">
+↻
+</button>
 
 <audio id="audio">
-
-    <source
-        src="voice.m4a"
-        type="audio/mp4">
-
+<source src="voice.m4a">
 </audio>
 
-    <!-- ===========================
-         SCRIPT
-    ============================ -->
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 

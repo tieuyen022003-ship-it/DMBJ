@@ -1,600 +1,115 @@
-/* ===========================================
-   RESET
-=========================================== */
-
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-html,
-body{
+html,body{
 
-    width:100%;
-    height:100%;
+width:100%;
+height:100%;
+overflow:hidden;
 
-}
+font-family:Futura,Arial,sans-serif;
 
-body{
-
-    overflow:hidden;
-
-    background:#000;
-
-    font-family:"Be Vietnam Pro",sans-serif;
-
-    color:#fff;
+background:#000;
 
 }
 
-/* ===========================================
-   BACKGROUND
-=========================================== */
+.background{
 
-#background{
+position:fixed;
 
-    position:fixed;
+width:100%;
+height:100%;
 
-    inset:0;
+object-fit:cover;
 
-    overflow:hidden;
-
-    z-index:-3;
+z-index:1;
 
 }
 
-#bgImage{
+.overlay{
 
-    width:100%;
+position:fixed;
 
-    height:100%;
+width:100%;
+height:100%;
 
-    object-fit:cover;
+background:rgba(255,255,255,.22);
 
-    transform:scale(1.1);
-
-    filter:
-
-        blur(10px)
-
-        brightness(.35);
-
-    animation:
-
-        zoom 30s linear infinite alternate;
-
-}
-
-@keyframes zoom{
-
-    from{
-
-        transform:scale(1.08);
-
-    }
-
-    to{
-
-        transform:scale(1.18);
-
-    }
-
-}
-
-#overlay{
-
-    position:fixed;
-
-    inset:0;
-
-    background:
-
-        linear-gradient(
-
-            rgba(0,0,0,.2),
-
-            rgba(0,0,0,.55)
-
-        );
-
-    z-index:-2;
-
-}
-
-/* ===========================================
-   INTRO
-=========================================== */
-
-#intro{
-
-    position:fixed;
-
-    inset:0;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    transition:.6s;
-
-    z-index:10;
-
-}
-
-.intro-box{
-
-    text-align:center;
-
-    animation:fadeIn 1s;
-
-}
-
-@keyframes fadeIn{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(25px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-/* ===========================================
-   TITLE
-=========================================== */
-
-h1{
-
-    font-size:72px;
-
-    font-weight:800;
-
-    letter-spacing:10px;
-
-    color:#fff;
-
-    margin-bottom:12px;
-
-    text-transform:uppercase;
-
-    text-shadow:
-        0 0 8px rgba(0,0,0,.8),
-        0 0 20px rgba(0,0,0,.7);
-
-    -webkit-text-stroke:1px #000;
-
-}
-
-h2{
-
-    font-size:24px;
-
-    font-weight:500;
-
-    letter-spacing:6px;
-
-    text-transform:uppercase;
-
-    color:#ffffffdd;
-
-    margin-bottom:55px;
-
-    text-shadow:
-        0 0 10px rgba(0,0,0,.9);
-
-}
-
-/* ===========================================
-   PLAY BUTTON
-=========================================== */
-
-#playBtn{
-
-    padding:18px 70px;
-
-    border:none;
-
-    border-radius:999px;
-
-    background:#1DB954;
-
-    color:#fff;
-
-    font-size:22px;
-
-    font-weight:700;
-
-    letter-spacing:2px;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-}
-
-#playBtn:hover{
-
-    transform:scale(1.05);
-
-    background:#1ed760;
-
-}
-
-#playBtn:active{
-
-    transform:scale(.96);
-
-}
-
-/* ===========================================
-   PLAYER
-=========================================== */
-
-#player{
-
-    position:fixed;
-
-    inset:0;
-
-    opacity:0;
-
-    pointer-events:none;
-
-    transition:.6s;
-
-}
-
-/* ===========================================
-   SUBTITLE
-=========================================== */
-
-#subtitleArea{
-
-    position:absolute;
-
-    left:0;
-
-    right:0;
-
-    top:50%;
-
-    transform:translateY(-50%);
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:0 60px;
+z-index:2;
 
 }
 
 #subtitle{
 
-    width:80%;
+position:fixed;
 
-    max-width:1200px;
+left:50%;
+bottom:8%;
 
-    min-height:140px;
+transform:translateX(-50%);
 
-    display:flex;
+width:90%;
 
-    justify-content:center;
+text-align:center;
 
-    align-items:center;
+color:white;
 
-    text-align:center;
+font-size:28px;
 
-    font-size:42px;
+font-weight:500;
 
-    line-height:1.6;
+text-shadow:
 
-    font-weight:700;
+2px 2px 8px rgba(0,0,0,.85);
 
-    color:#fff;
-
-    text-shadow:
-        0 0 12px rgba(0,0,0,1),
-        0 0 24px rgba(0,0,0,.8);
-
-    -webkit-text-stroke:.8px #000;
+z-index:5;
 
 }
 
-/* ===========================================
-   BOTTOM CONTROL BAR
-=========================================== */
+#playButton,
+#replayButton{
 
-#bottomBar{
+position:fixed;
 
-    position:fixed;
+left:50%;
+top:50%;
 
-    left:35px;
+transform:translate(-50%,-50%);
 
-    right:35px;
+width:90px;
 
-    bottom:25px;
+height:90px;
 
-    display:flex;
+border-radius:50%;
 
-    align-items:center;
+border:3px solid #000;
 
-    gap:15px;
+background:white;
 
-    z-index:20;
+color:black;
 
-}
+font-size:42px;
 
-#current,
-#duration{
+cursor:pointer;
 
-    width:65px;
+z-index:10;
 
-    text-align:center;
-
-    font-size:15px;
-
-    font-weight:600;
-
-    color:#ffffffcc;
+transition:.3s;
 
 }
 
-/* ===========================================
-   PROGRESS BAR
-=========================================== */
+#playButton:hover,
+#replayButton:hover{
 
-#progress{
-
-    flex:1;
-
-    height:6px;
-
-    appearance:none;
-
-    -webkit-appearance:none;
-
-    border-radius:999px;
-
-    background:#555;
-
-    cursor:pointer;
+transform:translate(-50%,-50%) scale(1.08);
 
 }
 
-/* Chrome */
+#replayButton{
 
-#progress::-webkit-slider-runnable-track{
-
-    height:6px;
-
-    background:#555;
-
-    border-radius:999px;
-
-}
-
-#progress::-webkit-slider-thumb{
-
-    appearance:none;
-
-    -webkit-appearance:none;
-
-    width:16px;
-
-    height:16px;
-
-    border-radius:50%;
-
-    background:#1DB954;
-
-    margin-top:-5px;
-
-    transition:.2s;
-
-}
-
-#progress:hover::-webkit-slider-thumb{
-
-    transform:scale(1.15);
-
-}
-
-/* Firefox */
-
-#progress::-moz-range-track{
-
-    height:6px;
-
-    background:#555;
-
-    border-radius:999px;
-
-}
-
-#progress::-moz-range-thumb{
-
-    width:16px;
-
-    height:16px;
-
-    border:none;
-
-    border-radius:50%;
-
-    background:#1DB954;
-
-}
-
-/* ===========================================
-   REPLAY BUTTON
-=========================================== */
-
-#replayBtn{
-
-    position:fixed;
-
-    left:50%;
-
-    bottom:90px;
-
-    transform:translateX(-50%);
-
-    display:none;
-
-    padding:15px 45px;
-
-    border:none;
-
-    border-radius:999px;
-
-    background:#1DB954;
-
-    color:#fff;
-
-    font-size:20px;
-
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-}
-
-#replayBtn:hover{
-
-    transform:translateX(-50%) scale(1.05);
-
-    background:#1ed760;
-
-}
-
-/* ===========================================
-   SHOW / HIDE
-=========================================== */
-
-.show{
-
-    opacity:1 !important;
-
-    pointer-events:auto !important;
-
-}
-
-.hide{
-
-    opacity:0 !important;
-
-    pointer-events:none !important;
-
-}
-
-/* ===========================================
-   SUBTITLE EFFECT
-=========================================== */
-
-.fade{
-
-    animation:subtitleFade .35s ease;
-
-}
-
-@keyframes subtitleFade{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(8px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-/* ===========================================
-   MOBILE
-=========================================== */
-
-@media(max-width:768px){
-
-    h1{
-
-        font-size:42px;
-
-        letter-spacing:5px;
-
-    }
-
-    h2{
-
-        font-size:18px;
-
-        letter-spacing:2px;
-
-        margin-bottom:35px;
-
-    }
-
-    #playBtn{
-
-        padding:15px 45px;
-
-        font-size:18px;
-
-    }
-
-    #subtitle{
-
-        width:92%;
-
-        min-height:100px;
-
-        font-size:28px;
-
-        line-height:1.5;
-
-    }
-
-    #bottomBar{
-
-        left:15px;
-
-        right:15px;
-
-        bottom:18px;
-
-    }
-
-    #current,
-    #duration{
-
-        width:48px;
-
-        font-size:13px;
-
-    }
+display:none;
 
 }

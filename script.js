@@ -1,180 +1,85 @@
-const audio = document.getElementById("audio");
+const audio=document.getElementById("audio");
 
-const intro = document.getElementById("intro");
-const player = document.getElementById("player");
+const subtitle=document.getElementById("subtitle");
 
-const playBtn = document.getElementById("playBtn");
-const replayBtn = document.getElementById("replayBtn");
+const play=document.getElementById("playButton");
 
-const subtitle = document.getElementById("subtitle");
+const replay=document.getElementById("replayButton");
 
-const progress = document.getElementById("progress");
-
-const current = document.getElementById("current");
-const duration = document.getElementById("duration");
-
-let subtitles = [];
-
-/* ==========================
-   LOAD LRC
-========================== */
+let subtitles=[];
 
 fetch("subtitle.lrc")
-.then(res => res.text())
-.then(text => {
 
-    subtitles = parseLRC(text);
+.then(r=>r.text())
+
+.then(text=>{
+
+const lines=text.split("\n");
+
+lines.forEach(line=>{
+
+const match=line.match(/\[(\d+):(\d+\.\d+)\](.*)/);
+
+if(match){
+
+subtitles.push({
+
+time:Number(match[1])*60+Number(match[2]),
+
+text:match[3].trim()
 
 });
 
-/* ==========================
-   PARSE LRC
-========================== */
+}
 
-function parseLRC(text){
+});
 
-    const lines = text.split("\n");
+});
 
-    const result = [];
+play.onclick=()=>{
 
-    for(const line of lines){
+play.style.display="none";
 
-        const match = line.match(/\[(\d+):(\d+\.\d+)\](.*)/);
+subtitle.innerHTML="";
 
-        if(!match) continue;
+audio.currentTime=0;
 
-        const min = parseInt(match[1]);
-
-        const sec = parseFloat(match[2]);
-
-        result.push({
-
-            time:min*60+sec,
-
-            text:match[3].trim()
-
-        });
-
-    }
-
-    return result;
+audio.play();
 
 }
 
-/* ==========================
-   PLAY
-========================== */
+replay.onclick=()=>{
 
-playBtn.onclick = ()=>{
+replay.style.display="none";
 
-    intro.style.opacity="0";
+subtitle.innerHTML="";
 
-    intro.style.pointerEvents="none";
+audio.currentTime=0;
 
-    player.style.opacity="1";
-
-    player.style.pointerEvents="auto";
-
-    audio.play();
-
-};
-
-/* ==========================
-   AUDIO READY
-========================== */
-
-audio.onloadedmetadata=()=>{
-
-    progress.max=Math.floor(audio.duration);
-
-    duration.innerText=format(audio.duration);
-
-};
-
-/* ==========================
-   UPDATE
-========================== */
-
-audio.ontimeupdate=()=>{
-
-    progress.value=audio.currentTime;
-
-    current.innerText=format(audio.currentTime);
-
-    updateSubtitle(audio.currentTime);
-
-};
-
-/* ==========================
-   SEEK
-========================== */
-
-progress.oninput=()=>{
-
-    audio.currentTime=progress.value;
-
-    updateSubtitle(audio.currentTime);
-
-};
-
-/* ==========================
-   SUBTITLE
-========================== */
-
-function updateSubtitle(time){
-
-    for(let i=subtitles.length-1;i>=0;i--){
-
-        if(time>=subtitles[i].time){
-
-            subtitle.innerText=subtitles[i].text;
-
-            return;
-
-        }
-
-    }
-
-    subtitle.innerText="";
+audio.play();
 
 }
 
-/* ==========================
-   FORMAT
-========================== */
+audio.addEventListener("timeupdate",()=>{
 
-function format(sec){
+const t=audio.currentTime;
 
-    sec=Math.floor(sec);
+for(let i=subtitles.length-1;i>=0;i--){
 
-    const m=Math.floor(sec/60);
+if(t>=subtitles[i].time){
 
-    const s=sec%60;
+subtitle.innerHTML=subtitles[i].text;
 
-    return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+break;
 
 }
 
-/* ==========================
-   END
-========================== */
+}
+
+});
 
 audio.onended=()=>{
 
-    replayBtn.style.display="block";
+replay.style.display="block";
 
-};
-
-/* ==========================
-   REPLAY
-========================== */
-
-replayBtn.onclick=()=>{
-
-    replayBtn.style.display="none";
-
-    audio.currentTime=0;
-
-    audio.play();
-
-};
+}
