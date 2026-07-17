@@ -1,115 +1,354 @@
+/* ===========================
+   RESET
+=========================== */
+
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
 
-width:100%;
-height:100%;
-overflow:hidden;
+    width:100%;
+    height:100%;
 
-font-family:Futura,Arial,sans-serif;
+    overflow:hidden;
 
-background:#000;
+    background:#000;
+
+    font-family:
+    "Be Vietnam Pro",
+    "Noto Sans",
+    system-ui,
+    sans-serif;
 
 }
+
+
+/* ===========================
+   BACKGROUND
+=========================== */
 
 .background{
 
-position:fixed;
+    position:fixed;
 
-width:100%;
-height:100%;
+    inset:0;
 
-object-fit:cover;
+    width:100%;
+    height:100%;
 
-z-index:1;
+    object-fit:cover;
+
+    user-select:none;
+
+    z-index:1;
+
+}
+
+
+/* ===========================
+   OVERLAY
+=========================== */
+
+#overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:#fff;
+
+    opacity:.20;
+
+    transition:opacity .4s ease;
+
+    z-index:2;
 
 }
 
-.overlay{
 
-position:fixed;
+/* ===========================
+   SNOW
+=========================== */
 
-width:100%;
-height:100%;
+#snow{
 
-background:rgba(255,255,255,.22);
+    position:fixed;
 
-z-index:2;
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    pointer-events:none;
+
+    z-index:3;
 
 }
+
+
+/* ===========================
+   SUBTITLE
+=========================== */
 
 #subtitle{
 
-position:fixed;
+    position:fixed;
 
-left:50%;
-bottom:8%;
+    left:50%;
 
-transform:translateX(-50%);
+    top:50%;
 
-width:90%;
+    transform:translate(-50%,-50%);
 
-text-align:center;
+    width:82%;
 
-color:white;
+    min-height:100px;
 
-font-size:28px;
+    display:flex;
 
-font-weight:500;
+    align-items:center;
 
-text-shadow:
+    justify-content:center;
 
-2px 2px 8px rgba(0,0,0,.85);
+    text-align:center;
 
-z-index:5;
+    color:white;
+
+    font-size:29px;
+
+    font-weight:600;
+
+    line-height:1.5;
+
+    letter-spacing:.02em;
+
+    opacity:0;
+
+    transition:
+
+    opacity .45s ease;
+
+    -webkit-text-stroke:
+
+    1px rgba(0,0,0,.9);
+
+    text-shadow:
+
+    0 4px 16px rgba(0,0,0,.55),
+
+    0 1px 3px rgba(0,0,0,.8);
+
+    z-index:10;
 
 }
+
+
+/* ===========================
+   PLAY BUTTON
+=========================== */
 
 #playButton,
 #replayButton{
 
-position:fixed;
+    position:fixed;
 
-left:50%;
-top:50%;
+    left:50%;
 
-transform:translate(-50%,-50%);
+    top:50%;
 
-width:90px;
+    transform:
 
-height:90px;
+    translate(-50%,-50%);
 
-border-radius:50%;
+    width:90px;
 
-border:3px solid #000;
+    height:90px;
 
-background:white;
+    border-radius:999px;
 
-color:black;
+    border:none;
 
-font-size:42px;
+    background:
 
-cursor:pointer;
+    rgba(255,255,255,.92);
 
-z-index:10;
+    backdrop-filter:
 
-transition:.3s;
+    blur(12px);
+
+    color:#111;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:20;
+
+    box-shadow:
+
+    0 18px 40px rgba(0,0,0,.28);
+
+    transition:
+
+    transform .25s,
+
+    opacity .35s,
+
+    background .3s;
 
 }
 
 #playButton:hover,
 #replayButton:hover{
 
-transform:translate(-50%,-50%) scale(1.08);
+    transform:
+
+    translate(-50%,-50%)
+
+    scale(1.08);
+
+    background:white;
 
 }
 
+#playButton:active,
+#replayButton:active{
+
+    transform:
+
+    translate(-50%,-50%)
+
+    scale(.95);
+
+}
+
+
+/* ===========================
+   HIDDEN
+=========================== */
+
+.hide{
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+
+
+/* ===========================
+   REPLAY
+=========================== */
+
 #replayButton{
 
-display:none;
+    display:none;
+
+}
+
+#replayButton.show{
+
+    display:flex;
+
+    animation:
+
+    replayFade .45s ease forwards;
+
+}
+
+@keyframes replayFade{
+
+0%{
+
+opacity:0;
+
+transform:
+
+translate(-50%,-50%)
+
+scale(.8);
+
+}
+
+100%{
+
+opacity:1;
+
+transform:
+
+translate(-50%,-50%)
+
+scale(1);
+
+}
+
+}
+
+
+/* ===========================
+   FADE SUBTITLE
+=========================== */
+
+.subtitle-show{
+
+    opacity:1 !important;
+
+}
+
+.subtitle-hide{
+
+    opacity:0 !important;
+
+}
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width:768px){
+
+#subtitle{
+
+    width:88%;
+
+    font-size:25px;
+
+    min-height:90px;
+
+}
+
+#playButton,
+#replayButton{
+
+    width:82px;
+
+    height:82px;
+
+}
+
+}
+
+
+/* ===========================
+   LARGE SCREEN
+=========================== */
+
+@media (min-width:1200px){
+
+#subtitle{
+
+    font-size:32px;
+
+}
 
 }

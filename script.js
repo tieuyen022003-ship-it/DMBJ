@@ -1,85 +1,180 @@
-const audio=document.getElementById("audio");
+const audio = document.getElementById("audio");
+const subtitle = document.getElementById("subtitle");
+const overlay = document.getElementById("overlay");
 
-const subtitle=document.getElementById("subtitle");
+const playButton = document.getElementById("playButton");
+const replayButton = document.getElementById("replayButton");
 
-const play=document.getElementById("playButton");
+let subtitles = [];
+let currentIndex = -1;
 
-const replay=document.getElementById("replayButton");
 
-let subtitles=[];
+/* ===========================
+   ĐỌC FILE LRC
+=========================== */
 
 fetch("subtitle.lrc")
 
-.then(r=>r.text())
+.then(res => res.text())
 
-.then(text=>{
+.then(text => {
 
-const lines=text.split("\n");
+    const lines = text.split(/\r?\n/);
 
-lines.forEach(line=>{
+    lines.forEach(line => {
 
-const match=line.match(/\[(\d+):(\d+\.\d+)\](.*)/);
+        const match = line.match(/\[(\d+):(\d+\.\d+)\](.*)/);
 
-if(match){
+        if(match){
 
-subtitles.push({
+            subtitles.push({
 
-time:Number(match[1])*60+Number(match[2]),
+                time:
+                Number(match[1])*60 +
+                Number(match[2]),
 
-text:match[3].trim()
+                text:
+                match[3].trim()
+
+            });
+
+        }
+
+    });
 
 });
 
-}
 
-});
+/* ===========================
+   PLAY
+=========================== */
 
-});
+playButton.onclick = () => {
 
-play.onclick=()=>{
+    playButton.classList.add("hide");
 
-play.style.display="none";
+    setTimeout(()=>{
 
-subtitle.innerHTML="";
+        playButton.style.display="none";
 
-audio.currentTime=0;
+    },350);
 
-audio.play();
+    replayButton.style.display="none";
 
-}
+    overlay.style.opacity=".15";
 
-replay.onclick=()=>{
+    subtitle.textContent="";
 
-replay.style.display="none";
+    subtitle.classList.remove("subtitle-show");
 
-subtitle.innerHTML="";
+    audio.currentTime=0;
 
-audio.currentTime=0;
+    currentIndex=-1;
 
-audio.play();
+    audio.play();
 
-}
+};
+
+
+/* ===========================
+   REPLAY
+=========================== */
+
+replayButton.onclick = () => {
+
+    replayButton.classList.remove("show");
+
+    replayButton.style.display="none";
+
+    subtitle.textContent="";
+
+    currentIndex=-1;
+
+    audio.currentTime=0;
+
+    audio.play();
+
+};
+
+
+/* ===========================
+   UPDATE SUBTITLE
+=========================== */
 
 audio.addEventListener("timeupdate",()=>{
 
-const t=audio.currentTime;
+    const current = audio.currentTime;
 
-for(let i=subtitles.length-1;i>=0;i--){
+    for(let i=subtitles.length-1;i>=0;i--){
 
-if(t>=subtitles[i].time){
+        if(current>=subtitles[i].time){
 
-subtitle.innerHTML=subtitles[i].text;
+            if(currentIndex!==i){
 
-break;
+                currentIndex=i;
 
-}
+                subtitle.classList.remove("subtitle-show");
 
-}
+                setTimeout(()=>{
+
+                    subtitle.textContent=subtitles[i].text;
+
+                    subtitle.classList.add("subtitle-show");
+
+                },180);
+
+            }
+
+            break;
+
+        }
+
+    }
 
 });
 
-audio.onended=()=>{
 
-replay.style.display="block";
+/* ===========================
+   KẾT THÚC
+=========================== */
 
-}
+audio.addEventListener("ended", () => {
+
+    // Ẩn phụ đề
+    subtitle.classList.remove("subtitle-show");
+
+    setTimeout(() => {
+        subtitle.textContent = "";
+    }, 300);
+
+    // Hiện nút Replay
+    replayButton.style.display = "flex";
+
+    // Đợi trình duyệt render rồi thêm hiệu ứng
+    requestAnimationFrame(() => {
+        replayButton.classList.add("show");
+    });
+
+});
+
+
+/* ===========================
+   PAUSE
+=========================== */
+
+audio.addEventListener("pause",()=>{
+
+    if(audio.ended) return;
+
+});
+
+
+/* ===========================
+   PLAY EVENT
+=========================== */
+
+audio.addEventListener("play",()=>{
+
+    overlay.style.opacity=".15";
+
+});
